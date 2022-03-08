@@ -1,9 +1,7 @@
 <template>
   <div class="section">
-    <h1 class="title">Interview Questions</h1>
-    <hr class="hr" />
-
-    <article
+    <the-interviewer></the-interviewer>
+    <!--<article
       class="media"
       v-for="document in questions.documents"
       :key="document._id"
@@ -14,19 +12,29 @@
           {{ document.question }}
         </div>
       </div>
-    </article>
+    </article>-->
   </div>
 </template>
 <script>
+import TheInterviewer from "../components/TheInterviewer.vue";
+
 export default {
+  components: { TheInterviewer },
   head() {
     return {
-      title: "Interview Questions",
+      title: "Interview Assitant",
+      meta: [
+        {
+          name: "Description ",
+          content:
+            "Our digital career coach organizes your unique information, and creates a tailored interview preparation guide to help you ace the interview and get the job.",
+        },
+      ],
     };
   },
-  async asyncData({ $axios, $dataApi }) {
+  /*async asyncData({ $axios, $dataApi }) {
     const questions = await $dataApi.getAllQuestions();
     return { questions };
-  },
+  },*/
 };
 </script>
