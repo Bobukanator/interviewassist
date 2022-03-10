@@ -1,13 +1,5 @@
 <template>
   <div class="welcomeBackground">
-    <section class="hero is-primary is-small">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title">Welcome</h1>
-          <h2 class="subtitle">Know Yourself, Know Your Plan</h2>
-        </div>
-      </div>
-    </section>
     <section class="section is-large">
       <div class="tile is-ancestor">
         <NuxtLink to="/interview-assistant">

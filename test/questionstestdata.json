@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Tell me about yourself.",
+    "tags": [
+      "Basic",
+      "About Yourself"
+    ],
+    "__v": 2
+  },
+  {
+    "question": "Why do you want this job?",
+    "tags": [
+      "Basic"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Where would you like to be in your career five years from now?",
+    "tags": [
+      "Basic"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Board Development.",
+    "tags": [
+      "Skill Related",
+      "Board Development"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me about a challenge you face on the Board of Directors.",
+    "tags": [
+      "Skill Related",
+      "Board Development"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Creativity Skills.",
+    "tags": [
+      "Skill Related",
+      "Creativity Skills"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Claims Management.",
+    "tags": [
+      "Skill Related",
+      "Claims Management"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Crisis Management.",
+    "tags": [
+      "Skill Related",
+      "Crisis Management"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Nursing Education.",
+    "tags": [
+      "Skill Related",
+      "Nursing Education"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with PCR Primer Design.",
+    "tags": [
+      "Skill Related",
+      "PCR Primer Design"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Awareness Raising.",
+    "tags": [
+      "Skill Related",
+      "Awareness Raising"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Communication.",
+    "tags": [
+      "Skill Related",
+      "Communication"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Corporate Communications.",
+    "tags": [
+      "Skill Related",
+      "Corporate Communications"
+    ],
+    "__v": 1
+  },
+  {
+    "question": "Tell me a bit about your experience with Avaya Communication Manager.",
+    "tags": [
+      "Skill Related",
+      "Avaya Communication Manager"
+    ],
+    "__v": 1
+  }
+]

@@ -1,22 +1,11 @@
 <template>
   <div class="section">
-    <the-interviewer></the-interviewer>
-    <!--<article
-      class="media"
-      v-for="document in questions.documents"
-      :key="document._id"
-    >
-      <div class="media-content">
-        <div class="content">
-          <strong>{{ document.tags[0] }} Question Type</strong><br />
-          {{ document.question }}
-        </div>
-      </div>
-    </article>-->
+    <the-interviewer :questions="randomizedquestions"></the-interviewer>
   </div>
 </template>
 <script>
 import TheInterviewer from "../components/TheInterviewer.vue";
+import { getRandomQuestionsByCount } from "~/utils/questionUtils";
 
 export default {
   components: { TheInterviewer },
@@ -32,9 +21,13 @@ export default {
       ],
     };
   },
-  /*async asyncData({ $axios, $dataApi }) {
+  async asyncData({ $axios, $dataApi }) {
     const questions = await $dataApi.getAllQuestions();
-    return { questions };
-  },*/
+    const randomizedquestions = getRandomQuestionsByCount(
+      questions.documents,
+      3
+    );
+    return { randomizedquestions };
+  },
 };
 </script>
