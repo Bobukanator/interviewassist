@@ -9,7 +9,8 @@ export default function (context, inject) {
   async function getAllQuestions() {
 
     try {
-      const response = await unWrap(await fetch('/api/iquestions'))
+      const apiURL = context.$axios.defaults.baseURL.concat("api/iquestions");
+      const response = await unWrap(await fetch(apiURL))
       return response.json;
 
     } catch (error) {

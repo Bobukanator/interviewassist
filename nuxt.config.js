@@ -15,7 +15,7 @@ export default {
     router: {
         prefetchLinks: false
     },
-    plugins: ['~/plugins/dataApi.client'],
+    plugins: ['~/plugins/dataApi'],
     modules: ['@nuxtjs/axios', 'nuxt-buefy', '~/modules/mongo'],
     css: ['~/assets/sass/app.scss'],
     build: {

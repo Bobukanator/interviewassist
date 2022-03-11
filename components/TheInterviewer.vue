@@ -1,5 +1,5 @@
 <template>
-  <div class="card is-primary">
+  <div class="card">
     <header class="card-header">
       <div class="card-header-title">
         <div class="block">
