@@ -3,7 +3,8 @@ import axios from 'axios'
 export default function () {
 
   this.nuxt.hook('render:setupMiddleware', (app) => {
-    app.use('/api/iquestions', getAllQuestions)
+    app.use('/api/iquestions', getAllQuestions);
+    app.use('/api/skills', getAllSkills);
   })
 
   async function getAllQuestions(req, res, next) {
@@ -15,6 +16,24 @@ export default function () {
       "filter": { "tags": "Basic" }
     })
 
+    callTheDB(data, res);
+
+  }
+
+  async function getAllSkills(req, res, next) {
+
+    var data = JSON.stringify({
+      "collection": "skills",
+      "database": "CareerInformaticsDB",
+      "dataSource": "BLawMongoCluster",
+      "limit": 10000
+    })
+
+    callTheDB(data, res);
+
+  }
+
+  async function callTheDB(data, res) {
     var url = 'https://data.mongodb-api.com/app/data-itrtd/endpoint/data/beta/action/find';
 
     var headers = {

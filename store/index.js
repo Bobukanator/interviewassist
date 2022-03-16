@@ -9,9 +9,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async nuxtServerInit({ commit }) {
-    console.log("nuxtServerInit() called");
-    //TODO update this to call Mongo
-    commit('set_skills', { skill: [{ "skill": "tempor" }, { "skill": "magna" }, { "skill": "reprehenderit" }, { "skill": "officia" }] });
+  async nuxtServerInit({ commit }, context) {
+    const response = await context.$dataApi.getAllSkills();
+    const skills = response.documents;
+    commit('set_skills', { skills });
   }
 }

@@ -6,9 +6,6 @@
       </div>
     </header>
     <div class="card-content">
-      <div class="block">
-        {{ skills }}
-      </div>
       <h2 class="title">Copy & Paste a job description</h2>
       <div class="content">
         <textarea
