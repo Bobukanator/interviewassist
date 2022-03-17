@@ -18,6 +18,11 @@ export function parseSkillsFromText(listofskills, text) {
 
 }
 
+export function skillHighlight(arrayOfSkills, text) {
+  var wordsRegExp = new RegExp('(^|\\W)(' + arrayOfSkills.map(function (o) { return escapeRegExpLocal(o); }).join('|') + ')(\\W|$)', 'gi');
+  return text ? text.replace(wordsRegExp, '$1<mark>$2</mark>$3') : "";
+}
+
 function escapeRegExpLocal(string) {
   if (string) {
     return string.replace(/([\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|])/g, "\\$1");

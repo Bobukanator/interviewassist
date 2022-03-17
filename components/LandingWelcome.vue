@@ -2,7 +2,7 @@
   <div class="welcomeBackground">
     <section class="section is-large">
       <div class="tile is-ancestor">
-        <NuxtLink to="/interview-assistant">
+        <NuxtLink to="/interview/skillscanner">
           <div class="tile is-child notification is-link">
             <h4><b>DIGITAL INTERVIEW COACHING</b></h4>
             <p>

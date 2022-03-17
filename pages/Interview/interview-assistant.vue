@@ -1,16 +1,14 @@
 <template>
   <div class="section">
-    <the-job-description-scanner> </the-job-description-scanner>
-    <!--<the-interviewer :questions="randomizedquestions"></the-interviewer>-->
+    <the-interviewer :questions="randomizedquestions"></the-interviewer>
   </div>
 </template>
 <script>
-import TheInterviewer from "../components/TheInterviewer.vue";
+import TheInterviewer from "../../components/TheInterviewer.vue";
 import { getRandomQuestionsByCount } from "~/utils/questionUtils";
-import TheJobDescriptionScanner from "../components/TheJobDescriptionScanner.vue";
 
 export default {
-  components: { TheInterviewer, TheJobDescriptionScanner },
+  components: { TheInterviewer },
   head() {
     return {
       title: "Interview Assitant",

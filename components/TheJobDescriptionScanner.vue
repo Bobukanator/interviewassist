@@ -6,7 +6,8 @@
       </div>
     </header>
     <div class="card-content">
-      <h2 class="title">Copy & Paste a job description</h2>
+      <h2 class="title" v-if="jobscanned">Job Description</h2>
+      <h2 class="title" v-else>Copy & Paste a job description</h2>
       <div class="content">
         <textarea
           v-model="jobdescription"
@@ -15,10 +16,44 @@
           placeholder="..."
           :tabindex="1"
           ref="jobdescriptiontextareabox"
+          v-if="!jobscanned"
         ></textarea>
+        <div v-if="jobscanned" class="tile is-ancestor">
+          <div class="tile is-parent">
+            <div class="tile is-child box">
+              <div class="content" v-html="jobdescriptionhighlighted"></div>
+            </div>
+          </div>
+          <div class="tile is-4 is-child notification is-info">
+            <p class="title">Skills<br /><br /></p>
+            <ul>
+              <li class="subtitle" v-for="skill in parsedSkills" :key="skill">
+                {{ skill }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    <footer class="card-footer">
+    <footer v-if="jobscanned" class="card-footer">
+      <p class="card-footer-item">
+        <input
+          class="button is-light"
+          :tabindex="2"
+          value="Scan Again"
+          @click="scanagain()"
+        />
+      </p>
+      <p class="card-footer-item">
+        <input
+          class="button is-primary"
+          :tabindex="1"
+          value="Start Interview"
+          @click="startinterview()"
+        />
+      </p>
+    </footer>
+    <footer v-else="jobscanned" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-primary"
@@ -32,15 +67,40 @@
   </div>
 </template>
 <script>
+import { parseSkillsFromText, skillHighlight } from "~/utils/skillsUtils";
 export default {
   data() {
     return {
       jobdescription: "",
+      parsedSkills: [],
+      jobscanned: false,
     };
   },
   computed: {
     skills() {
-      return this.$store.state.skills;
+      return this.$store.state.skills.skills;
+    },
+    jobdescriptionhighlighted() {
+      return skillHighlight(this.parsedSkills, this.jobdescription);
+    },
+  },
+  methods: {
+    scan() {
+      if (this.jobdescription != "") {
+        this.parsedSkills = parseSkillsFromText(
+          this.skills,
+          this.jobdescription
+        );
+        this.jobscanned = true;
+      }
+    },
+    scanagain() {
+      this.jobdescription = "";
+      this.jobscanned = false;
+    },
+    startinterview() {
+      this.$store.commit("set_scannedskills", this.parsedSkills);
+      this.$router.push({ path: "interview-assistant" });
     },
   },
 };

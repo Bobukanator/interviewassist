@@ -16,7 +16,7 @@
           </b-navbar-item>
           <b-navbar-item
             tag="router-link"
-            :to="{ path: '/interview-assistant' }"
+            :to="{ path: '/interview/skillscanner' }"
           >
             Interview Assistant
           </b-navbar-item>

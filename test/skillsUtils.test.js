@@ -1,4 +1,4 @@
-import { parseSkillsFromText } from "../utils/skillsUtils"
+import { parseSkillsFromText, skillHighlight } from "../utils/skillsUtils"
 
 const fs = require('fs');
 var TESTSKILLDATA = JSON.parse(fs.readFileSync('test/skillstestdata.json', 'utf8'));
@@ -17,5 +17,19 @@ test('test parseSkillsFromText using TESTSKILLDATA', () => {
   const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ ";
 
   expect(parseSkillsFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+
+})
+
+test('test skillHighlight', () => {
+  const expected = "The <mark>ITIL</mark> smart guy knows his <mark>KPIs</mark>!"
+  const textinput = "The ITIL smart guy knows his KPIs!"
+  const highlightTheseWordsArray = ["ITIL", "KPIs"]
+
+  expect(skillHighlight(highlightTheseWordsArray, textinput)).toBe(expected);
+  const highlightTheseWordsArray2 = ["ITIL", "KPIs", "guy"]
+  const expected2 = "The <mark>ITIL</mark> smart <mark>guy</mark> knows his <mark>KPIs</mark>!"
+  expect(skillHighlight(highlightTheseWordsArray2, textinput)).toBe(expected2);
+
+  //TODO - add case where there are TWO keywords right next to each other! 
 
 })
