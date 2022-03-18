@@ -8,8 +8,7 @@ export default function (context, inject) {
 
   async function getAllQuestions() {
     try {
-      const apiURL = context.$axios.defaults.baseURL.concat("api/iquestions");
-      const response = await unWrap(await fetch(apiURL))
+      const response = await unWrap(await fetch(process.env.BASE_URL + "/api/iquestions"))
       return response.json;
 
     } catch (error) {
@@ -20,8 +19,7 @@ export default function (context, inject) {
 
   async function getAllSkills() {
     try {
-      const apiURL = context.$axios.defaults.baseURL.concat("api/skills");
-      const response = await unWrap(await fetch(apiURL))
+      const response = await unWrap(await fetch(process.env.BASE_URL + "/api/skills"))
       return response.json;
 
     } catch (error) {
