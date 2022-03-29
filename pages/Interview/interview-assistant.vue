@@ -21,12 +21,24 @@ export default {
       ],
     };
   },
-  async asyncData({ $axios, $dataApi }) {
+  async asyncData({ store, $axios, $dataApi }) {
+    //get Basic Questions
     const questions = await $dataApi.getAllQuestions();
     const randomizedquestions = getRandomQuestionsByCount(
       questions.documents,
       3
     );
+    // get Skill Related Questions if skills exist
+    if (store.state.scannedSkills) {
+      const skillbasedquestions = await $dataApi.getQuestionsByTags(
+        store.state.scannedSkills
+      );
+      const randomizedskillbasedquestions = getRandomQuestionsByCount(
+        skillbasedquestions.documents,
+        9
+      );
+      randomizedquestions.push(...randomizedskillbasedquestions);
+    }
     return { randomizedquestions };
   },
 };

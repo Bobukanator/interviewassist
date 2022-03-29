@@ -86,7 +86,6 @@ $link-focus-border: $primary;
   max-height: 65px
 }
 
-/* Normal and Large screens*/
-@media (min-width: 768px) {
+@include from($desktop){
     .welcomeBackground { background: url("/images/ci-welcome-1600x1200.jpg") center center/cover no-repeat; }
 }

@@ -85,12 +85,13 @@ export default {
     },
     getPrevQuestion() {
       this.index = this.index - 1;
-      console.log("calling get prev question - index is now " + this.index);
       this.focusTheAnswerTextBox();
     },
     focusTheAnswerTextBox() {
       this.$refs.answertextareabox.focus();
-      if (this.answers[this.index]) this.answer = this.answers[this.index];
+      if (this.answers[this.index]) {
+        this.answer = this.answers[this.index];
+      } else this.answer = null;
     },
     atLastQuestion() {
       return this.index >= this.questions.length - 1;

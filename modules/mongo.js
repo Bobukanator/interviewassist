@@ -1,11 +1,34 @@
 import axios from 'axios'
+import bodyParser from 'body-parser'
 
 export default function () {
 
   this.nuxt.hook('render:setupMiddleware', (app) => {
+    app.use(bodyParser.json());
     app.use('/api/iquestions', getAllQuestions);
+    app.use('/api/iquestionsbytag', getQuestionsbyTag);
     app.use('/api/skills', getAllSkills);
   })
+
+  async function getQuestionsbyTag(req, res) {
+
+    const body = req.body;
+    if (!body || !body.tags) {
+      return rejectHitBadRequest(res)
+    }
+
+    const tags = body.tags;
+
+    var data = JSON.stringify({
+      "collection": "questions",
+      "database": "CareerInformaticsDB",
+      "dataSource": "BLawMongoCluster",
+      "filter": { "tags": { "$in": tags } }
+    })
+
+    callTheDB(data, res);
+
+  }
 
   async function getAllQuestions(req, res, next) {
 
@@ -49,6 +72,11 @@ export default function () {
   function sendJSON(data, res) {
     res.setHeader('Content-Type', 'application/json')
     res.end(JSON.stringify(data))
+  }
+
+  function rejectHitBadRequest(res) {
+    res.statusCode = 400
+    res.end()
   }
 
 }
