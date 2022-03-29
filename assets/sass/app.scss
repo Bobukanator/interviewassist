@@ -90,10 +90,3 @@ $link-focus-border: $primary;
 @media (min-width: 768px) {
     .welcomeBackground { background: url("/images/ci-welcome-1600x1200.jpg") center center/cover no-repeat; }
 }
-
-/* Smartphones (landscape and portrait) ----------- */
-@media screen and (max-width: 767px) {
-    .welcomeBackground { 
-        background: url("/images/ci-welcome-500x833.jpg") center center/cover no-repeat; 
-      }
-}
