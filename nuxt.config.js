@@ -8,9 +8,10 @@ export default {
         bodyAttrs: {
             class: ["body"]
         },
-        meta: [{
-            charset: "utf-8",
-        }]
+        meta: [
+            { charset: "utf-8" },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+        ]
     },
     env: {
         BASE_URL: process.env.BASE_URL || 'http://localhost:3000'
