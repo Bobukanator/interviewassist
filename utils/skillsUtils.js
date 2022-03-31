@@ -19,7 +19,8 @@ export function parseSkillsFromText(listofskills, text) {
 }
 
 export function skillHighlight(arrayOfSkills, text) {
-  var wordsRegExp = new RegExp('(^|\\W)(' + arrayOfSkills.map(function (o) { return escapeRegExpLocal(o); }).join('|') + ')(\\W|$)', 'gi');
+  const descendLengthSkillsArray = arrayOfSkills.sort((a, b) => b.length - a.length); //this is required to highlight multiple word skills
+  var wordsRegExp = new RegExp('(^|\\b)(' + descendLengthSkillsArray.map(function (o) { return escapeRegExpLocal(o); }).join('|') + ')(\\b|$)', 'gi');
   return text ? text.replace(wordsRegExp, '$1<mark>$2</mark>$3') : "";
 }
 

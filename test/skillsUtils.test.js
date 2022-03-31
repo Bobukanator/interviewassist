@@ -30,6 +30,23 @@ test('test skillHighlight', () => {
   const expected2 = "The <mark>ITIL</mark> smart <mark>guy</mark> knows his <mark>KPIs</mark>!"
   expect(skillHighlight(highlightTheseWordsArray2, textinput)).toBe(expected2);
 
-  //TODO - add case where there are TWO keywords right next to each other! 
+
+})
+
+test('test skillHighlight with long inclusive skills', () => {
+  const expected = "The <mark>ITIL</mark> smart guy knows his <mark>KPIs</mark>! He is <mark>Apache Spark</mark> cerified!"
+  const textinput = "The ITIL smart guy knows his KPIs! He is Apache Spark cerified!"
+  const highlightTheseWordsArray = ["ITIL", "KPIs", "Apache", "Apache Spark"]
+
+  expect(skillHighlight(highlightTheseWordsArray, textinput)).toBe(expected);
+
+})
+
+test('test skillHighlight with skills next to each other in text', () => {
+  const expected = "The smart guy knows his <mark>ITIL</mark> <mark>KPIs</mark>! He is <mark>Apache Spark</mark> cerified!"
+  const textinput = "The smart guy knows his ITIL KPIs! He is Apache Spark cerified!"
+  const highlightTheseWordsArray = ["ITIL", "KPIs", "Apache", "Apache Spark"]
+
+  expect(skillHighlight(highlightTheseWordsArray, textinput)).toBe(expected);
 
 })
