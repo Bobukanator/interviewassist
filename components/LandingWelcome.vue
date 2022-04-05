@@ -2,17 +2,30 @@
   <div class="welcomeBackground">
     <section class="section is-large">
       <div class="tile is-ancestor">
-        <NuxtLink to="/interview/skillscanner">
-          <div class="tile is-child notification is-link">
-            <h4><b>DIGITAL INTERVIEW COACHING</b></h4>
-            <p>
-              Our digital career coach organizes your unique information, and
-              creates a tailored interview preparation guide to help you ace the
-              interview and get the job
-            </p>
-            <br />
-          </div>
-        </NuxtLink>
+        <div class="tile is-parent is-6">
+          <NuxtLink to="/interview/interview-assistant">
+            <div class="tile is-child notification is-link">
+              <h4><b>Basic Interview</b></h4>
+              <p>
+                Jump into an interview with 12 basic questions. After the
+                interview, you will receive a report to save.
+              </p>
+            </div>
+          </NuxtLink>
+        </div>
+        <div class="tile is-parent is-6">
+          <NuxtLink to="/interview/skillscanner">
+            <div class="tile is-child notification is-link">
+              <h4><b>Smart Interview</b></h4>
+              <p>
+                Our digital career coach organizes your unique information, and
+                creates a tailored interview preparation guide to help you ace
+                the interview and get the job by scanning a job description and
+                asking relevant questions.
+              </p>
+            </div>
+          </NuxtLink>
+        </div>
       </div>
     </section>
     <div class="notification is-primary">

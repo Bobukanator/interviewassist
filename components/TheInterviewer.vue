@@ -36,7 +36,7 @@
           class="button is-primary"
           type="submit"
           :tabindex="2"
-          value="Next"
+          :value="nextvalue"
           @click="save()"
         />
       </p>
@@ -66,21 +66,32 @@ export default {
     question() {
       return this.questions[this.index].question;
     },
+    nextvalue() {
+      return this.atLastQuestion ? "Submit" : "Next";
+    },
+    atLastQuestion() {
+      return this.index >= this.questions.length - 1;
+    },
   },
   methods: {
     save() {
       this.$store.commit("interview/addQuestion", this.question);
       this.$store.commit("interview/addAnswer", this.answer);
+
+      let qaitem = { ...this.questions[this.index] };
+      qaitem.answer = this.answer;
+      this.$store.commit("interview/addQAT", qaitem);
+
       this.answers[this.index] = this.answer;
       this.answer = "";
       this.getNextQuestion();
     },
     getNextQuestion() {
-      if (!this.atLastQuestion()) {
+      if (!this.atLastQuestion) {
         this.index++;
         this.focusTheAnswerTextBox();
       } else {
-        // Do something here
+        this.$router.push({ path: "report" });
       }
     },
     getPrevQuestion() {
@@ -92,9 +103,6 @@ export default {
       if (this.answers[this.index]) {
         this.answer = this.answers[this.index];
       } else this.answer = null;
-    },
-    atLastQuestion() {
-      return this.index >= this.questions.length - 1;
     },
   },
 };

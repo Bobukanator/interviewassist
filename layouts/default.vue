@@ -16,9 +16,15 @@
           </b-navbar-item>
           <b-navbar-item
             tag="router-link"
+            :to="{ path: '/interview/interview-assistant' }"
+          >
+            Basic Interview
+          </b-navbar-item>
+          <b-navbar-item
+            tag="router-link"
             :to="{ path: '/interview/skillscanner' }"
           >
-            Interview Assistant
+            Smart Interview
           </b-navbar-item>
           <b-navbar-dropdown label="Info">
             <b-navbar-item tag="router-link" :to="{ path: '/about' }">
@@ -27,7 +33,6 @@
             <b-navbar-item href="#"> Contact </b-navbar-item>
           </b-navbar-dropdown>
         </template>
-
         <template #end>
           <!--        <b-navbar-item tag="div">
             <div class="buttons">
