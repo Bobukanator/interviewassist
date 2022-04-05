@@ -40,7 +40,7 @@
         <input
           class="button is-light"
           :tabindex="2"
-          value="Scan Again"
+          value="Rescan"
           @click="scanagain()"
         />
       </p>
@@ -48,7 +48,7 @@
         <input
           class="button is-primary"
           :tabindex="1"
-          value="Start Interview"
+          value="Next"
           @click="startinterview()"
         />
       </p>
