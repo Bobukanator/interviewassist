@@ -19,7 +19,7 @@ export default {
     router: {
         prefetchLinks: false
     },
-    plugins: ['~/plugins/dataApi'],
+    plugins: ['~/plugins/dataApi', '~/plugins/gs.client'],
     modules: ['@nuxtjs/axios', 'nuxt-buefy', '~/modules/mongo'],
     css: ['~/assets/sass/app.scss'],
     build: {
@@ -27,5 +27,5 @@ export default {
         loaders: {
             limit: 0,
         }
-    }
+    },
 }
