@@ -18,10 +18,12 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }, context) {
-    const responseSkills = await context.$dataApi.getAllSkills();
-    const skills = responseSkills.documents;
-    commit('set_skills', { skills });
+    //Originally loaded this proactively HOWEVER this causes unnecessary calls to mongodb which could end up costing money for no value -> 
+    //I have moved this to on demand loading locations!
+    /* const responseSkills = await context.$dataApi.getAllSkills();
+     const skills = responseSkills.documents;
+     commit('set_skills', { skills });
     const responseQuestions = await context.$dataApi.getAllQuestions();
-    commit("set_basicquestions", responseQuestions);
+    commit("set_basicquestions", responseQuestions);*/
   }
 }

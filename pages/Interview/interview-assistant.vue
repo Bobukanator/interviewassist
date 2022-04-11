@@ -24,9 +24,6 @@ export default {
   async asyncData({ store, $axios, $dataApi }) {
     const totalQuestions = 12;
 
-    //get Basic Questions
-    const questions = store.state.basicQuestions;
-
     const randomizedquestions = [];
 
     // get Skill Related Questions if skills exist
@@ -41,9 +38,13 @@ export default {
       );
       randomizedquestions.push(...randomizedskillbasedquestions);
     }
+    if (!store.state.basicQuestions) {
+      const responseQuestions = await $dataApi.getAllQuestions();
+      store.commit("set_basicquestions", responseQuestions);
+    }
 
     const randomizedbasicquestions = getRandomQuestionsByCount(
-      questions.documents,
+      store.state.basicQuestions.documents,
       totalQuestions - randomizedquestions.length //always want to have at least <totalQuestions>
     );
     randomizedquestions.push(...randomizedbasicquestions);

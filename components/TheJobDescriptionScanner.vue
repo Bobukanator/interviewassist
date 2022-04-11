@@ -85,13 +85,19 @@ export default {
     },
   },
   methods: {
-    scan() {
+    async scan() {
       if (this.jobdescription != "") {
+        this.jobscanned = true;
+        if (!this.$store.state.skills) {
+          const responseSkills = await this.$dataApi.getAllSkills();
+          const skills = responseSkills.documents;
+          this.$store.commit("set_skills", { skills });
+        }
+
         this.parsedSkills = parseSkillsFromText(
           this.skills,
           this.jobdescription
         );
-        this.jobscanned = true;
       }
     },
     scanagain() {
