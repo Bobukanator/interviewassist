@@ -12,7 +12,8 @@ export default {
       title: "Interview Report",
       meta: [
         {
-          name: "Description ",
+          name: "description",
+          hid: "description",
           content:
             "Our digital career coach organizes your unique information, and creates a tailored interview preparation guide to help you ace the interview and get the job.",
         },
