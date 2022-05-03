@@ -211,7 +211,7 @@ export default {
           name: "description",
           hid: "description",
           content:
-            "Our privacy is important to us. It is Career Informatics&#39; policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you.",
+            "Your privacy is important to us. It is Career Informatics&#39; policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you.",
         },
       ],
     };
