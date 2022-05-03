@@ -9,6 +9,9 @@
       <h2 class="title" v-if="jobscanned">Job Description</h2>
       <h2 class="title" v-else>Copy & Paste a job description</h2>
       <div class="content">
+        <div v-if="jobscanning">
+          <b-progress type="is-info"></b-progress>
+        </div>
         <textarea
           v-model="jobdescription"
           class="textarea"
@@ -16,9 +19,9 @@
           placeholder="..."
           :tabindex="1"
           ref="jobdescriptiontextareabox"
-          v-if="!jobscanned"
+          v-if="!(jobscanned || jobscanning)"
         ></textarea>
-        <div v-if="jobscanned" class="tile is-ancestor">
+        <div v-if="jobscanned && !jobscanning" class="tile is-ancestor">
           <div class="tile is-parent">
             <div class="tile is-child box">
               <div class="content" v-html="jobdescriptionhighlighted"></div>
@@ -35,7 +38,7 @@
         </div>
       </div>
     </div>
-    <footer v-if="jobscanned" class="card-footer">
+    <footer v-if="jobscanned && !jobscanning" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-light"
@@ -53,7 +56,7 @@
         />
       </p>
     </footer>
-    <footer v-else="jobscanned" class="card-footer">
+    <footer v-if="!jobscanning" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-primary"
@@ -74,6 +77,7 @@ export default {
       jobdescription: "",
       parsedSkills: [],
       jobscanned: false,
+      jobscanning: false,
     };
   },
   computed: {
@@ -87,7 +91,7 @@ export default {
   methods: {
     async scan() {
       if (this.jobdescription != "") {
-        this.jobscanned = true;
+        this.jobscanning = true;
         if (!this.$store.state.skills) {
           const responseSkills = await this.$dataApi.getAllSkills();
           const skills = responseSkills.documents;
@@ -98,6 +102,8 @@ export default {
           this.skills,
           this.jobdescription
         );
+        this.jobscanning = false;
+        this.jobscanned = true;
       }
     },
     scanagain() {
