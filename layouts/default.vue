@@ -22,7 +22,7 @@
           </b-navbar-item>
           <b-navbar-item
             tag="router-link"
-            :to="{ path: '/interview/skillscanner' }"
+            :to="{ path: '/interview/jobskillscanner' }"
           >
             Smart Interview
           </b-navbar-item>

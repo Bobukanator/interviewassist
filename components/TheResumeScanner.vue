@@ -2,29 +2,29 @@
   <div class="card">
     <header class="card-header">
       <div class="card-header-title">
-        <div class="block">Job skill scan</div>
+        <div class="block">Resume skill scan</div>
       </div>
     </header>
     <div class="card-content">
-      <h2 class="title" v-if="jobscanned">Job Description</h2>
-      <h2 class="title" v-else>Copy & Paste a job description</h2>
+      <h2 class="title" v-if="jobscanned">Resume/CV</h2>
+      <h2 class="title" v-else>Copy & Paste your Resume/CV</h2>
       <div class="content">
-        <div v-if="jobscanning">
+        <div v-if="resumescanning">
           <b-progress type="is-info"></b-progress>
         </div>
         <textarea
-          v-model="jobdescription"
+          v-model="resumecontent"
           class="textarea"
           rows="10"
           placeholder="..."
           :tabindex="1"
           ref="jobdescriptiontextareabox"
-          v-if="!(jobscanned || jobscanning)"
+          v-if="!(resumescanned || resumescanning)"
         ></textarea>
-        <div v-if="jobscanned && !jobscanning" class="tile is-ancestor">
+        <div v-if="resumescanned && !jobscanning" class="tile is-ancestor">
           <div class="tile is-parent">
             <div class="tile is-child box">
-              <div class="content" v-html="jobdescriptionhighlighted"></div>
+              <div class="content" v-html="resumecontenthighlighted"></div>
             </div>
           </div>
           <div class="tile is-4 is-child notification is-info">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <footer v-if="jobscanned && !jobscanning" class="card-footer">
+    <footer v-if="resumescanned && !resumescanning" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-light"
@@ -56,7 +56,7 @@
         />
       </p>
     </footer>
-    <footer v-if="!jobscanning && !jobscanned" class="card-footer">
+    <footer v-if="!resumescanning && !resumescanned" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-primary"
@@ -74,24 +74,24 @@ import { parseSkillsFromText, skillHighlight } from "~/utils/skillsUtils";
 export default {
   data() {
     return {
-      jobdescription: "",
+      resumecontent: "",
       parsedSkills: [],
-      jobscanned: false,
-      jobscanning: false,
+      resumescanned: false,
+      resumescanning: false,
     };
   },
   computed: {
     skills() {
       return this.$store.state.skills.skills;
     },
-    jobdescriptionhighlighted() {
-      return skillHighlight(this.parsedSkills, this.jobdescription);
+    resumecontenthighlighted() {
+      return skillHighlight(this.parsedSkills, this.resumecontent);
     },
   },
   methods: {
     async scan() {
-      if (this.jobdescription != "") {
-        this.jobscanning = true;
+      if (this.resumecontent != "") {
+        this.resumescanning = true;
         if (!this.$store.state.skills) {
           const responseSkills = await this.$dataApi.getAllSkills();
           const skills = responseSkills.documents;
@@ -100,19 +100,19 @@ export default {
 
         this.parsedSkills = parseSkillsFromText(
           this.skills,
-          this.jobdescription
+          this.resumecontent
         );
-        this.jobscanning = false;
-        this.jobscanned = true;
+        this.resumescanning = false;
+        this.resumescanned = true;
       }
     },
     scanagain() {
-      this.jobdescription = "";
-      this.jobscanned = false;
+      this.resumecontent = "";
+      this.resumescanned = false;
     },
     startinterview() {
-      this.$store.commit("set_scannedskills", this.parsedSkills);
-      this.$router.push({ path: "interview-assistant" });
+      //this.$store.commit("set_scannedskills", this.parsedSkills);
+      //this.$router.push({ path: "interview-assistant" });
     },
   },
 };

@@ -14,7 +14,7 @@
           </NuxtLink>
         </div>
         <div class="tile is-parent is-6">
-          <NuxtLink to="/interview/skillscanner">
+          <NuxtLink to="/interview/jobskillscanner">
             <div class="tile is-child notification is-link">
               <h4><b>Smart Interview</b></h4>
               <p>
