@@ -1,14 +1,20 @@
 <template>
   <div class="section">
-    <the-job-description-scanner> </the-job-description-scanner>
+    <the-skill-scanner
+      ScannerType="JobScanAndInterview"
+      ScannerTitle="Job Skill Scanner"
+      ScannedTextTitle="Job Description"
+      ScanInstructions="Copy & Paste a job description"
+    >
+    </the-skill-scanner>
   </div>
 </template>
 <script>
 import { getRandomQuestionsByCount } from "~/utils/questionUtils";
-import TheJobDescriptionScanner from "../../components/TheJobDescriptionScanner.vue";
+import TheSkillScanner from "../../components/TheSkillScanner.vue";
 
 export default {
-  components: { TheJobDescriptionScanner },
+  components: { TheSkillScanner },
   head() {
     return {
       title: "Job Description Scan",

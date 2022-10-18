@@ -1,15 +1,26 @@
 <template>
   <div class="section">
-    <the-job-description-scanner> </the-job-description-scanner>
-    <the-resume-scanner></the-resume-scanner>
+    <the-skill-scanner
+      ScannerType="SkillScannerModule"
+      ScannerTitle="Job Skill Scanner"
+      ScannedTextTitle="Job Description"
+      ScanInstructions="Copy & Paste a job description"
+    >
+    </the-skill-scanner>
+    <the-skill-scanner
+      ScannerType="SkillScannerModule"
+      ScannerTitle="Resume Parser"
+      ScannedTextTitle="Resume/CV"
+      ScanInstructions="Copy & Paste your Resume/CV"
+    >
+    </the-skill-scanner>
   </div>
 </template>
 <script>
-import TheJobDescriptionScanner from "../components/TheJobDescriptionScanner.vue";
-import TheResumeScanner from "../components/TheResumeScanner.vue";
+import TheSkillScanner from "../components/TheSkillScanner.vue";
 
 export default {
-  components: { TheJobDescriptionScanner, TheResumeScanner },
+  components: { TheSkillScanner },
   head() {
     return {
       title: "Skill Scanner",

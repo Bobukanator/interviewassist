@@ -2,29 +2,29 @@
   <div class="card">
     <header class="card-header">
       <div class="card-header-title">
-        <div class="block">Resume skill scan</div>
+        <div class="block">{{ ScannerTitle }}</div>
       </div>
     </header>
     <div class="card-content">
-      <h2 class="title" v-if="jobscanned">Resume/CV</h2>
-      <h2 class="title" v-else>Copy & Paste your Resume/CV</h2>
+      <h2 class="title" v-if="textscanned">{{ ScannedTextTitle }}</h2>
+      <h2 class="title" v-else>{{ ScanInstructions }}</h2>
       <div class="content">
-        <div v-if="resumescanning">
+        <div v-if="scanning">
           <b-progress type="is-info"></b-progress>
         </div>
         <textarea
-          v-model="resumecontent"
+          v-model="textforparsing"
           class="textarea"
           rows="10"
           placeholder="..."
           :tabindex="1"
           ref="jobdescriptiontextareabox"
-          v-if="!(resumescanned || resumescanning)"
+          v-if="!(textscanned || scanning)"
         ></textarea>
-        <div v-if="resumescanned && !jobscanning" class="tile is-ancestor">
+        <div v-if="textscanned && !scanning" class="tile is-ancestor">
           <div class="tile is-parent">
             <div class="tile is-child box">
-              <div class="content" v-html="resumecontenthighlighted"></div>
+              <div class="content" v-html="jobdescriptionhighlighted"></div>
             </div>
           </div>
           <div class="tile is-4 is-child notification is-info">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <footer v-if="resumescanned && !resumescanning" class="card-footer">
+    <footer v-if="textscanned && !scanning" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-light"
@@ -47,7 +47,7 @@
           @click="scanagain()"
         />
       </p>
-      <p class="card-footer-item">
+      <p class="card-footer-item" v-if="ScannerType == 'JobScanAndInterview'">
         <input
           class="button is-primary"
           :tabindex="1"
@@ -56,7 +56,7 @@
         />
       </p>
     </footer>
-    <footer v-if="!resumescanning && !resumescanned" class="card-footer">
+    <footer v-if="!scanning && !textscanned" class="card-footer">
       <p class="card-footer-item">
         <input
           class="button is-primary"
@@ -74,45 +74,70 @@ import { parseSkillsFromText, skillHighlight } from "~/utils/skillsUtils";
 export default {
   data() {
     return {
-      resumecontent: "",
+      textforparsing: "",
       parsedSkills: [],
-      resumescanned: false,
-      resumescanning: false,
+      textscanned: false,
+      scanning: false,
     };
+  },
+  props: {
+    ScannerType: {
+      type: String,
+      required: true,
+    },
+    ScannerTitle: {
+      type: String,
+      required: true,
+    },
+    ScannedTextTitle: {
+      type: String,
+      required: true,
+    },
+    ScanInstructions: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     skills() {
       return this.$store.state.skills.skills;
     },
-    resumecontenthighlighted() {
-      return skillHighlight(this.parsedSkills, this.resumecontent);
+    jobdescriptionhighlighted() {
+      return skillHighlight(this.parsedSkills, this.textforparsing);
     },
   },
   methods: {
     async scan() {
-      if (this.resumecontent != "") {
-        this.resumescanning = true;
+      if (this.jobdescription != "") {
+        this.scanning = true;
         if (!this.$store.state.skills) {
           const responseSkills = await this.$dataApi.getAllSkills();
           const skills = responseSkills.documents;
           this.$store.commit("set_skills", { skills });
         }
 
-        this.parsedSkills = parseSkillsFromText(
+        const parsedSkillsFromText = parseSkillsFromText(
           this.skills,
-          this.resumecontent
+          this.textforparsing
         );
-        this.resumescanning = false;
-        this.resumescanned = true;
+        this.saveSkills(parsedSkillsFromText);
+        this.parsedSkills = parsedSkillsFromText.slice(); //making shallow copy of array - directly using parsedSkillsFromText with vuex causes challenges when using v-model due to Vuex Strict mode
+        this.scanning = false;
+        this.textscanned = true;
       }
     },
     scanagain() {
-      this.resumecontent = "";
-      this.resumescanned = false;
+      this.textforparsing = "";
+      this.textscanned = false;
     },
     startinterview() {
-      //this.$store.commit("set_scannedskills", this.parsedSkills);
-      //this.$router.push({ path: "interview-assistant" });
+      this.$router.push({ path: "interview-assistant" });
+    },
+    saveSkills(skills) {
+      if (this.ScannerTitle == "Job Skill Scanner")
+        this.$store.commit("set_scannedjobskills", skills);
+      if (this.ScannerTitle == "Resume Parser")
+        this.$store.commit("set_scannedresumeskills", skills);
     },
   },
 };

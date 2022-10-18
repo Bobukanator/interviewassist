@@ -28,11 +28,11 @@ export default {
     const randomizedquestions = [];
 
     // get Skill Related Questions if skills exist
-    if (store.state.scannedSkills) {
+    if (store.state.scannedJobSkills) {
       const skillbasedquestions = await $dataApi.getQuestionsByTags(
-        store.state.scannedSkills
+        store.state.scannedJobSkills
       );
-      store.commit("set_scannedskills", null); //reset scanned skills so if our user wants to scan again or do a basic interview, they can!
+      store.commit("set_scannedjobskills", null); //reset scanned skills so if our user wants to scan again or do a basic interview, they can!
       const randomizedskillbasedquestions = getRandomQuestionsByCount(
         skillbasedquestions.documents,
         9 //Max 9 skill based questions for now
