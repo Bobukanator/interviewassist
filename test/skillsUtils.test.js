@@ -50,3 +50,12 @@ test('test skillHighlight with skills next to each other in text', () => {
   expect(skillHighlight(highlightTheseWordsArray, textinput)).toBe(expected);
 
 })
+
+test('test to fix C++ bug', () => {
+  const expected = "The smart guy knows his <mark>C++</mark>! He is <mark>Microsoft</mark> cerified!"
+  const textinput = "The smart guy knows his C++! He is Microsoft cerified!"
+  const highlightTheseWordsArray = ["C++", "KPIs", "Microsoft"]
+
+  expect(skillHighlight(highlightTheseWordsArray, textinput)).toBe(expected);
+
+})
