@@ -26,6 +26,9 @@
           >
             Smart Interview
           </b-navbar-item>
+          <b-navbar-item tag="router-link" :to="{ path: '/skillscanner' }">
+            Resume/Job Skill Scanner
+          </b-navbar-item>
           <b-navbar-item tag="router-link" :to="{ path: '/about' }">
             About
           </b-navbar-item>

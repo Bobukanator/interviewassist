@@ -198,7 +198,7 @@
       For any questions or concerns regarding your privacy, you may contact us
       using the following details:
     </p>
-    <p>Brian at Spero Autem USA # +1 267-753-9235</p>
+    <p>Spero Autem USA # +1 267-753-9235</p>
   </section>
 </template>
 <script>

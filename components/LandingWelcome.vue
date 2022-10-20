@@ -1,31 +1,31 @@
 <template>
   <div class="welcomeBackground">
     <section class="section is-large">
-      <div class="tile is-ancestor">
-        <div class="tile is-parent is-6">
-          <NuxtLink to="/interview/interview-assistant">
-            <div class="tile is-child notification is-link">
-              <h4><b>Basic Interview</b></h4>
-              <p>
-                Jump into an interview with 12 basic questions. After the
-                interview, you will receive a report to save.
-              </p>
-            </div>
-          </NuxtLink>
-        </div>
-        <div class="tile is-parent is-6">
-          <NuxtLink to="/interview/jobskillscanner">
-            <div class="tile is-child notification is-link">
-              <h4><b>Smart Interview</b></h4>
-              <p>
-                Our digital career coach organizes your unique information, and
-                creates a tailored interview preparation guide to help you ace
-                the interview and get the job by scanning a job description and
-                asking relevant questions.
-              </p>
-            </div>
-          </NuxtLink>
-        </div>
+      <div class="columns">
+        <card
+          title="Basic Interview"
+          icon="account-question-outline"
+          link="/interview/interview-assistant"
+        >
+          Jump into an interview with basic questions. After the interview, you
+          will receive a report to save.
+        </card>
+        <card
+          title="Smart Interview"
+          icon="account-question"
+          link="/interview/jobskillscanner"
+        >
+          Scan a job description and take a tailored interview. After the
+          interview, you will receive a report to save.
+        </card>
+        <card
+          title="Resume/Job Skill Scanner"
+          icon="file-compare"
+          link="/skillscanner"
+        >
+          Scan a job description and your resume/CV to find skill gaps. Use the
+          comparison table to make a plan to fill those gaps.
+        </card>
       </div>
     </section>
     <div class="notification is-primary">
