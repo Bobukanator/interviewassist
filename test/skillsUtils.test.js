@@ -1,4 +1,4 @@
-import { parseSkillsFromText, skillHighlight } from "../utils/skillsUtils"
+import { parseSkillsFromText, skillHighlight, createSkillCompareArray } from "../utils/skillsUtils"
 
 const fs = require('fs');
 var TESTSKILLDATA = JSON.parse(fs.readFileSync('test/skillstestdata.json', 'utf8'));
@@ -58,4 +58,43 @@ test('test to fix C++ bug', () => {
 
   expect(skillHighlight(highlightTheseWordsArray, textinput)).toBe(expected);
 
+})
+
+test('test skill compare table', () => {
+  const resumeskills = ["tempor", "magna", "reprehenderit", "officia"]
+  const jobskills = ["dolore", "magna", "laboris", "reprehenderit", "officia", "veniam"]
+  const actual = createSkillCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(6);
+  expect(actual[0]).toHaveProperty("skill");
+  expect(actual[0].skill).toBe("dolore");
+  expect(actual[0]).not.toHaveProperty("in_resume");
+  expect(actual[1].skill).toBe("magna");
+  expect(actual[1]).toHaveProperty("in_resume");
+  expect(actual[2]).not.toHaveProperty("in_resume");
+  expect(actual[3]).toHaveProperty("in_resume");
+  expect(actual[4]).toHaveProperty("in_resume");
+  expect(actual[5]).not.toHaveProperty("in_resume");
+})
+
+test('test skill compare table with empty jobskills', () => {
+  const resumeskills = ["tempor", "magna", "reprehenderit", "officia"]
+  const jobskills = []
+  const actual = createSkillCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(0);
+})
+
+test('test skill compare table with empty resumeskills', () => {
+  const resumeskills = []
+  const jobskills = ["dolore", "magna", "laboris", "reprehenderit", "officia", "veniam"]
+  const actual = createSkillCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(6);
+  expect(actual[0]).not.toHaveProperty("in_resume");
+  expect(actual[1]).not.toHaveProperty("in_resume");
+  expect(actual[2]).not.toHaveProperty("in_resume");
+  expect(actual[3]).not.toHaveProperty("in_resume");
+  expect(actual[4]).not.toHaveProperty("in_resume");
+  expect(actual[5]).not.toHaveProperty("in_resume");
 })

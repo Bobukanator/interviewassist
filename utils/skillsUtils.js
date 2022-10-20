@@ -24,6 +24,17 @@ export function skillHighlight(arrayOfSkills, text) {
   return text ? text.replace(wordsRegExp, '$1<mark>$2</mark>') : "";
 }
 
+export function createSkillCompareArray(jobskills, resumeskills) {
+  var compareArray = [];
+  for (let jobskill of jobskills) {
+    var skillcompareitem = { "skill": jobskill };
+    if (resumeskills.includes(jobskill))
+      skillcompareitem.in_resume = true;
+    compareArray.push(skillcompareitem);
+  }
+  return compareArray;
+}
+
 function escapeRegExpLocal(string) {
   if (string) {
     return string.replace(/([\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|])/g, "\\$1");
