@@ -1,4 +1,4 @@
-import { parseSkillsFromText, skillHighlight, createSkillCompareArray } from "../utils/skillsUtils"
+import { parseSkillsFromText, skillHighlight, createSkillCompareArray, parseSkillsWCountFromText } from "../utils/skillsUtils"
 
 const fs = require('fs');
 var TESTSKILLDATA = JSON.parse(fs.readFileSync('test/skillstestdata.json', 'utf8'));
@@ -17,6 +17,37 @@ test('test parseSkillsFromText using TESTSKILLDATA', () => {
   const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ ";
 
   expect(parseSkillsFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+
+})
+
+test('test parseSkillsWithCountFromText using TESTSKILLDATA', () => {
+  const expected = [
+    { "skill": "ITIL Certified", "count": "1" }, { "skill": "Test Driven Development", "count": "1" }, { "skill": "Workforce Management", "count": "1" }
+  ];
+  const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ ";
+
+  expect(parseSkillsWCountFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+
+})
+
+test('test parseSkillsWithCountFromText2 using TESTSKILLDATA', () => {
+  const expected = [
+    { "skill": "ITIL Certified", "count": "1" }, { "skill": "Test Driven Development", "count": "1" }, { "skill": "Workforce Management", "count": "2" }
+  ];
+  const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ Workforce Management of cats\ ";
+
+  expect(parseSkillsWCountFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+
+})
+
+
+test('test parseSkillsWithCountFromText3 using TESTSKILLDATA', () => {
+  const expected = [
+    { "skill": "ITIL Certified", "count": "2" }, { "skill": "Test Driven Development", "count": "1" }, { "skill": "Workforce Management", "count": "3" }
+  ];
+  const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ Workforce Management of cats\ I am additionally ITIL Certified and still love Workforce Management ";
+
+  expect(parseSkillsWCountFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
 
 })
 

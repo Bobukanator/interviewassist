@@ -18,6 +18,22 @@ export function parseSkillsFromText(listofskills, text) {
 
 }
 
+export function parseSkillsWCountFromText(listofskills, text) {
+
+  var parsedSkills = parseSkillsFromText(listofskills, text)
+  var returnSkills = []
+
+  parsedSkills.forEach(skill => {
+    var theSkillObject = {}
+    theSkillObject.skill = skill;
+    var skillRegExp = new RegExp('(^|\\W)(' + skill + ')', 'gi')
+    theSkillObject.count = String((text.match(skillRegExp) || []).length)
+    returnSkills.push(theSkillObject);
+  })
+
+  return returnSkills;
+}
+
 export function skillHighlight(arrayOfSkills, text) {
   const descendLengthSkillsArray = arrayOfSkills.sort((a, b) => b.length - a.length); //this is required to highlight multiple word skills
   var wordsRegExp = new RegExp('(^|\\W)(' + descendLengthSkillsArray.map(function (o) { return escapeRegExpLocal(o); }).join("|") + ')(?=\\W|$)', 'gi');
