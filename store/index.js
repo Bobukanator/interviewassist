@@ -1,7 +1,9 @@
 export const state = () => ({
   skills: null,
   scannedJobSkills: null,
+  scannedJobSkillCounts: null,
   scannedResumeSkills: null,
+  scannedResumeSkillCounts: null,
   basicQuestions: null
 })
 
@@ -12,8 +14,14 @@ export const mutations = {
   set_scannedjobskills(state, theskills) {
     state.scannedJobSkills = theskills
   },
+  set_scannedjobskillcounts(state, theskillcounts) {
+    state.scannedJobSkillCounts = theskillcounts
+  },
   set_scannedresumeskills(state, theskills) {
     state.scannedResumeSkills = theskills
+  },
+  set_scannedresumeskillcounts(state, theskillcounts) {
+    state.scannedResumeSkillCounts = theskillcounts
   },
   set_basicquestions(state, basicquestions) {
     state.basicQuestions = basicquestions

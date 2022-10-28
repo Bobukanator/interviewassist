@@ -70,7 +70,11 @@
   </div>
 </template>
 <script>
-import { parseSkillsFromText, skillHighlight } from "~/utils/skillsUtils";
+import {
+  parseSkillsFromText,
+  parseSkillsWCountFromText,
+  skillHighlight,
+} from "~/utils/skillsUtils";
 export default {
   data() {
     return {
@@ -120,7 +124,13 @@ export default {
           this.skills,
           this.textforparsing
         );
-        this.saveSkills(parsedSkillsFromText);
+
+        const parsedSkillCountsFromText = parseSkillsWCountFromText(
+          parsedSkillsFromText,
+          this.textforparsing
+        );
+
+        this.saveSkills(parsedSkillsFromText, parsedSkillCountsFromText);
         this.parsedSkills = parsedSkillsFromText.slice(); //making shallow copy of array - directly using parsedSkillsFromText with vuex causes challenges when using v-model due to Vuex Strict mode
         this.scanning = false;
         this.textscanned = true;
@@ -133,11 +143,15 @@ export default {
     startinterview() {
       this.$router.push({ path: "interview-assistant" });
     },
-    saveSkills(skills) {
-      if (this.ScannerTitle == "Job Skill Scanner")
+    saveSkills(skills, skill_counts) {
+      if (this.ScannerTitle == "Job Skill Scanner") {
         this.$store.commit("set_scannedjobskills", skills);
-      if (this.ScannerTitle == "Resume Parser")
+        this.$store.commit("set_scannedjobskillcounts", skill_counts);
+      }
+      if (this.ScannerTitle == "Resume Parser") {
         this.$store.commit("set_scannedresumeskills", skills);
+        this.$store.commit("set_scannedresumeskillcounts", skill_counts);
+      }
     },
   },
 };

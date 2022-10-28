@@ -26,7 +26,7 @@ test('test parseSkillsWithCountFromText using TESTSKILLDATA', () => {
   ];
   const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ ";
 
-  expect(parseSkillsWCountFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+  expect(parseSkillsWCountFromText(parseSkillsFromText(TESTSKILLDATA, text), text)).toStrictEqual(expected);
 
 })
 
@@ -36,7 +36,7 @@ test('test parseSkillsWithCountFromText2 using TESTSKILLDATA', () => {
   ];
   const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ Workforce Management of cats\ ";
 
-  expect(parseSkillsWCountFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+  expect(parseSkillsWCountFromText(parseSkillsFromText(TESTSKILLDATA, text), text)).toStrictEqual(expected);
 
 })
 
@@ -47,7 +47,7 @@ test('test parseSkillsWithCountFromText3 using TESTSKILLDATA', () => {
   ];
   const text = " Skills include \ Test Driven Development for all code\  ITIL Certified \ Workforce Management of professionals\ Workforce Management of cats\ I am additionally ITIL Certified and still love Workforce Management ";
 
-  expect(parseSkillsWCountFromText(TESTSKILLDATA, text)).toStrictEqual(expected);
+  expect(parseSkillsWCountFromText(parseSkillsFromText(TESTSKILLDATA, text), text)).toStrictEqual(expected);
 
 })
 

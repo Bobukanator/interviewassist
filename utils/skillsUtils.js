@@ -18,9 +18,8 @@ export function parseSkillsFromText(listofskills, text) {
 
 }
 
-export function parseSkillsWCountFromText(listofskills, text) {
+export function parseSkillsWCountFromText(parsedSkills, text) {
 
-  var parsedSkills = parseSkillsFromText(listofskills, text)
   var returnSkills = []
 
   parsedSkills.forEach(skill => {
