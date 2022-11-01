@@ -34,25 +34,41 @@
             <b-icon icon="check-bold" type="is-success"></b-icon> YES
           </div>
         </b-table-column>
+        <b-table-column
+          field="jobskillcount"
+          label="Skill count in Job"
+          width="10"
+          v-slot="props"
+        >
+          {{ props.row.jobskillcount }}
+        </b-table-column>
+        <b-table-column
+          field="resumeskillcount"
+          label="Skill count in Resume"
+          width="10"
+          v-slot="props"
+        >
+          {{ props.row.resumeskillcount }}
+        </b-table-column>
       </b-table>
     </div>
   </div>
 </template>
 <script>
-import { createSkillCompareArray } from "~/utils/skillsUtils";
+import { createSkillCountCompareArray } from "~/utils/skillsUtils";
 export default {
   computed: {
     AllScanned() {
       return (
-        this.$store.state.scannedJobSkills &&
-        this.$store.state.scannedResumeSkills
+        this.$store.state.scannedJobSkillCounts &&
+        this.$store.state.scannedResumeSkillCounts
       );
     },
     SkillCompareArray() {
       if (this.AllScanned)
-        return createSkillCompareArray(
-          this.$store.state.scannedJobSkills,
-          this.$store.state.scannedResumeSkills
+        return createSkillCountCompareArray(
+          this.$store.state.scannedJobSkillCounts,
+          this.$store.state.scannedResumeSkillCounts
         );
       return [];
     },
