@@ -1,4 +1,4 @@
-import { parseSkillsFromText, skillHighlight, createSkillCompareArray, parseSkillsWCountFromText } from "../utils/skillsUtils"
+import { parseSkillsFromText, skillHighlight, createSkillCompareArray, parseSkillsWCountFromText, createSkillCountCompareArray } from "../utils/skillsUtils"
 
 const fs = require('fs');
 var TESTSKILLDATA = JSON.parse(fs.readFileSync('test/skillstestdata.json', 'utf8'));
@@ -128,4 +128,119 @@ test('test skill compare table with empty resumeskills', () => {
   expect(actual[3]).not.toHaveProperty("in_resume");
   expect(actual[4]).not.toHaveProperty("in_resume");
   expect(actual[5]).not.toHaveProperty("in_resume");
+})
+
+test('test skill count compare table', () => {
+  const resumeskills = [{ "skill": "dolore", "count": "1" }, { "skill": "reprehenderit", "count": "2" }]
+  const jobskills = [{ "skill": "dolore", "count": "2" }, { "skill": "laboris", "count": "1" }, { "skill": "reprehenderit", "count": "3" }]
+  const actual = createSkillCountCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(3);
+  expect(actual[0]).toHaveProperty("skill");
+  expect(actual[0].skill).toBe("dolore");
+  expect(actual[0].jobskillcount).toBe("2");
+  expect(actual[0].resumeskillcount).toBe("1");
+  expect(actual[0]).toHaveProperty("in_resume");
+
+
+  expect(actual[1].skill).toBe("laboris");
+  expect(actual[1].jobskillcount).toBe("1");
+  expect(actual[1].resumeskillcount).toBe("0");
+  expect(actual[1]).not.toHaveProperty("in_resume");
+
+  expect(actual[2].skill).toBe("reprehenderit");
+  expect(actual[2].jobskillcount).toBe("3");
+  expect(actual[2].resumeskillcount).toBe("2");
+  expect(actual[2]).toHaveProperty("in_resume");
+
+})
+
+test('test skill count compare table 2', () => {
+  const resumeskills = [{ "skill": "dolore", "count": "1" }, { "skill": "reprehenderit", "count": "2" }, { "skill": "laboris", "count": "5" }, { "skill": "officia", "count": "1" }]
+  const jobskills = [{ "skill": "dolore", "count": "2" }, { "skill": "laboris", "count": "1" }, { "skill": "reprehenderit", "count": "3" }]
+  const actual = createSkillCountCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(3);
+  expect(actual[0]).toHaveProperty("skill");
+  expect(actual[0].skill).toBe("dolore");
+  expect(actual[0].jobskillcount).toBe("2");
+  expect(actual[0].resumeskillcount).toBe("1");
+  expect(actual[0]).toHaveProperty("in_resume");
+
+  expect(actual[1].skill).toBe("laboris");
+  expect(actual[1].jobskillcount).toBe("1");
+  expect(actual[1].resumeskillcount).toBe("5");
+  expect(actual[1]).toHaveProperty("in_resume");
+
+  expect(actual[2].skill).toBe("reprehenderit");
+  expect(actual[2].jobskillcount).toBe("3");
+  expect(actual[2].resumeskillcount).toBe("2");
+  expect(actual[2]).toHaveProperty("in_resume");
+
+})
+
+test('test skill count compare table 3', () => {
+  const jobskills = [{ "skill": "dolore", "count": "1" }, { "skill": "reprehenderit", "count": "2" }, { "skill": "laboris", "count": "5" }, { "skill": "officia", "count": "1" }]
+  const resumeskills = [{ "skill": "dolore", "count": "2" }, { "skill": "laboris", "count": "1" }, { "skill": "reprehenderit", "count": "3" }]
+  const actual = createSkillCountCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(4);
+  expect(actual[0]).toHaveProperty("skill");
+  expect(actual[0].skill).toBe("dolore");
+  expect(actual[0].jobskillcount).toBe("1");
+  expect(actual[0].resumeskillcount).toBe("2");
+  expect(actual[0]).toHaveProperty("in_resume");
+
+  expect(actual[1].skill).toBe("reprehenderit");
+  expect(actual[1].jobskillcount).toBe("2");
+  expect(actual[1].resumeskillcount).toBe("3");
+  expect(actual[1]).toHaveProperty("in_resume");
+
+  expect(actual[2].skill).toBe("laboris");
+  expect(actual[2].jobskillcount).toBe("5");
+  expect(actual[2].resumeskillcount).toBe("1");
+  expect(actual[2]).toHaveProperty("in_resume");
+
+  expect(actual[3].skill).toBe("officia");
+  expect(actual[3].jobskillcount).toBe("1");
+  expect(actual[3].resumeskillcount).toBe("0");
+  expect(actual[3]).not.toHaveProperty("in_resume");
+
+})
+
+test('test skill count compare table with empty resumeskills', () => {
+  const resumeskills = []
+  const jobskills = [{ "skill": "dolore", "count": "1" }, { "skill": "reprehenderit", "count": "2" }, { "skill": "laboris", "count": "5" }, { "skill": "officia", "count": "1" }]
+  const actual = createSkillCountCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(4);
+  expect(actual[0]).toHaveProperty("skill");
+  expect(actual[0].skill).toBe("dolore");
+  expect(actual[0].jobskillcount).toBe("1");
+  expect(actual[0].resumeskillcount).toBe("0");
+  expect(actual[0]).not.toHaveProperty("in_resume");
+
+  expect(actual[1].skill).toBe("reprehenderit");
+  expect(actual[1].jobskillcount).toBe("2");
+  expect(actual[1].resumeskillcount).toBe("0");
+  expect(actual[1]).not.toHaveProperty("in_resume");
+
+  expect(actual[2].skill).toBe("laboris");
+  expect(actual[2].jobskillcount).toBe("5");
+  expect(actual[2].resumeskillcount).toBe("0");
+  expect(actual[2]).not.toHaveProperty("in_resume");
+
+  expect(actual[3].skill).toBe("officia");
+  expect(actual[3].jobskillcount).toBe("1");
+  expect(actual[3].resumeskillcount).toBe("0");
+  expect(actual[3]).not.toHaveProperty("in_resume");
+})
+
+test('test skill count compare table with empty jobskills', () => {
+  const jobskills = []
+  const resumeskills = [{ "skill": "dolore", "count": "1" }, { "skill": "reprehenderit", "count": "2" }, { "skill": "laboris", "count": "5" }, { "skill": "officia", "count": "1" }]
+  const actual = createSkillCountCompareArray(jobskills, resumeskills)
+
+  expect(actual).toHaveLength(0);
+
 })

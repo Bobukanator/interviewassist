@@ -50,6 +50,27 @@ export function createSkillCompareArray(jobskills, resumeskills) {
   return compareArray;
 }
 
+export function createSkillCountCompareArray(jobskills, resumeskills) {
+  var compareArray = [];
+  for (let jobskill of jobskills) {
+    var skillcompareitem = { "skill": jobskill.skill };
+    for (let resumeskill of resumeskills) {
+      if (resumeskill.skill == jobskill.skill) {
+        skillcompareitem.in_resume = true;
+        skillcompareitem.jobskillcount = jobskill.count;
+        skillcompareitem.resumeskillcount = resumeskill.count;
+        break;
+      }
+    }
+    if (!skillcompareitem.in_resume) {
+      skillcompareitem.jobskillcount = jobskill.count;
+      skillcompareitem.resumeskillcount = "0";
+    }
+    compareArray.push(skillcompareitem);
+  }
+  return compareArray;
+}
+
 function escapeRegExpLocal(string) {
   if (string) {
     return string.replace(/([\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|])/g, "\\$1");
