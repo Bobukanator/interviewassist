@@ -37,8 +37,8 @@
       </p>
     </div>
     <div class="columns is-centered">
-      <div class="column is-3">
-        <b-image
+        <div class="column is-3">
+                <b-image
           :src="require('@/static/images/CBC_Small.png')"
           alt="Career Boot Camp Coaches Logo"
         ></b-image>
@@ -54,18 +54,18 @@
 </template>
 <script>
 export default {
-  head() {
+  head () {
     return {
-      title: "About",
+      title: 'About',
       meta: [
         {
-          name: "description",
-          hid: "description",
+          name: 'description',
+          hid: 'description',
           content:
-            "This current site exists to honor the original Career Boot Camp Coaches vision to empower and inspire individuals to harness their career potential.",
-        },
-      ],
-    };
-  },
-};
-</script> 
+            'This current site exists to honor the original Career Boot Camp Coaches vision to empower and inspire individuals to harness their career potential.'
+        }
+      ]
+    }
+  }
+}
+</script>

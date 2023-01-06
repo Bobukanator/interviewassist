@@ -65,12 +65,12 @@
 <script>
 export default {
   computed: {
-    user() {
-      return this.$store.state.auth.user;
+    user () {
+      return this.$store.state.auth.user
     },
-    isLoggedIn() {
-      return this.$store.state.auth.isLoggedIn;
-    },
-  },
-};
+    isLoggedIn () {
+      return this.$store.state.auth.isLoggedIn
+    }
+  }
+}
 </script>

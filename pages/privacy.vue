@@ -203,18 +203,18 @@
 </template>
 <script>
 export default {
-  head() {
+  head () {
     return {
-      title: "Privacy",
+      title: 'Privacy',
       meta: [
         {
-          name: "description",
-          hid: "description",
+          name: 'description',
+          hid: 'description',
           content:
-            "Your privacy is important to us. It is Career Informatics&#39; policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you.",
-        },
-      ],
-    };
-  },
-};
-</script> 
+            'Your privacy is important to us. It is Career Informatics&#39; policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you.'
+        }
+      ]
+    }
+  }
+}
+</script>
