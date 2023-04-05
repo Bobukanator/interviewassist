@@ -25,7 +25,8 @@ export function parseSkillsWCountFromText(parsedSkills, text) {
   parsedSkills.forEach(skill => {
     var theSkillObject = {}
     theSkillObject.skill = skill;
-    var skillRegExp = new RegExp('(^|\\W)(' + skill + ')', 'gi')
+    var escapedSkill = escapeRegExpLocal(skill); // Escape any special regex characters
+    var skillRegExp = new RegExp('(^|\\W)(' + escapedSkill + ')', 'gi')
     theSkillObject.count = String((text.match(skillRegExp) || []).length)
     returnSkills.push(theSkillObject);
   })
