@@ -1,4 +1,10 @@
-export default {
+import { defineNuxtConfig } from "@nuxt/bridge"
+
+export default defineNuxtConfig({
+    bridge: {
+        typescript: true,
+        nitro: false // If migration to Nitro is complete, set to true
+    },
     components: true,
     head: {
         titleTemplate: "Career Informatics: %s",
@@ -20,7 +26,7 @@ export default {
         prefetchLinks: false
     },
     plugins: ['~/plugins/dataApi', '~/plugins/gs.client'],
-    modules: ['@nuxtjs/axios', 'nuxt-buefy', '~/modules/mongo'],
+    //modules: ['@nuxtjs/axios', 'nuxt-buefy', '~/modules/mongo'], //not supported in NUXT 3
     css: ['~/assets/sass/app.scss'],
     build: {
         extractCSS: true,
@@ -28,4 +34,4 @@ export default {
             limit: 0,
         }
     },
-}
+})
